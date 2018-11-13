@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/white"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/searchQuery"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:background="@drawable/edittext_shadow"
+            android:fontFamily="@font/athelas_regular"
+            android:gravity="center_vertical"
+            android:hint="Search"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="17dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/buttonSearch"
+            android:layout_width="75dp"
+            android:layout_height="43dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_view_cart"
+            android:gravity="center"
+            android:text="Search"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/recycler_list_search" />
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="18dp"-->
+    <!--android:layout_marginRight="18dp"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="43dp"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:fontFamily="@font/athelas_bold"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="Cuisines"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/cuisines_recycler_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="43dp"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:fontFamily="@font/athelas_bold"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="Diets"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/diets_recycler_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="43dp"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:fontFamily="@font/athelas_bold"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="Intolerances/Allergies"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/allergies_recycler_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="10dp" />-->
+
+    <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+</LinearLayout>

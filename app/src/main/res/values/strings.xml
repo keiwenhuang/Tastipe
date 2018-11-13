@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">tastipe</string>
+
+    <!-- Tabs -->
+    <string name="articles">Articles</string>
+    <string name="recipes">Recipes</string>
+    <string name="cooking_tips">Cooking Tips</string>
+    <string name="article_fragment">Article</string>
+    <string name="search">Search</string>
+
+    <!-- Navigation Menu -->
+    <string name="hearts">Hearts</string>
+    <string name="recipe_drafts">Recipe Drafts</string>
+    <string name="grocery_cart">Grocery Cart</string>
+    <string name="about">About</string>
+    <string name="contact">Contact</string>
+
+</resources>

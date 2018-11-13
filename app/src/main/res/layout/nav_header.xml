@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="148dp">
+
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="144dp"
+        android:layout_height="96dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="17dp"
+        android:scaleType="fitCenter" />
+
+    <EditText
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="28dp"
+        android:layout_toRightOf="@id/profile_picture"
+        android:background="@null"
+        android:fontFamily="@font/athelas_bold"
+        android:hint="Name"
+        android:text="Johnson Smith"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/user_location"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_below="@id/user_name"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@id/profile_picture"
+        android:background="@null"
+        android:fontFamily="@font/athelas_regular"
+        android:hint="Location"
+        android:text="Los Angeles"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/recipe_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="17dp"
+        android:layout_toRightOf="@id/profile_picture"
+        android:fontFamily="@font/athelas_regular"
+        android:text="31 recipes"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>
