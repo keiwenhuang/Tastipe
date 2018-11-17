@@ -27,7 +27,7 @@
                 android:layout_height="24dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/vector_back_arrow" />
+                android:src="@drawable/ic_back_arrow" />
 
             <TextView
                 style="@style/ToolbarText"

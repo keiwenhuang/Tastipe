@@ -28,7 +28,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/vector_back_arrow" />
+                android:src="@drawable/ic_back_arrow" />
 
             <TextView
                 style="@style/ToolbarText"
@@ -45,7 +45,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/vector_add" />
+                android:src="@drawable/ic_add" />
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

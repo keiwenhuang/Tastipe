@@ -4,7 +4,7 @@
     <group>
         <item
             android:id="@+id/hearts"
-            android:icon="@drawable/vector_heart_red"
+            android:icon="@drawable/ic_heart_red"
             android:title="@string/hearts" />
 
         <item
@@ -14,7 +14,7 @@
 
         <item
             android:id="@+id/grocery_cart"
-            android:icon="@drawable/vector_cart"
+            android:icon="@drawable/ic_cart"
             android:title="@string/grocery_cart" />
     </group>
 

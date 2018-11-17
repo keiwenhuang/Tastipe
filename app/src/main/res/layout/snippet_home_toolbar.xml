@@ -16,7 +16,7 @@
             <!--android:layout_alignParentLeft="true"-->
             <!--android:layout_centerVertical="true"-->
             <!--android:layout_marginLeft="19dp"-->
-            <!--android:src="@drawable/vector_menu" />-->
+            <!--android:src="@drawable/ic_menu" />-->
 
         <TextView
             style="@style/ToolbarText"

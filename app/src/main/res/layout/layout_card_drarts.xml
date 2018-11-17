@@ -27,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="19dp"
             android:layout_marginTop="13dp"
-            android:src="@drawable/vector_delete" />
+            android:src="@drawable/ic_delete" />
 
         <LinearLayout
             android:layout_width="match_parent"

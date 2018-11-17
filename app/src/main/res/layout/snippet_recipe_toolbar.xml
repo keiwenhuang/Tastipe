@@ -25,7 +25,7 @@
                 android:layout_height="24dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/vector_back_arrow" />
+                android:src="@drawable/ic_back_arrow" />
 
             <TextView
                 style="@style/ToolbarText"
@@ -42,7 +42,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dp"
                 android:layout_toLeftOf="@id/btn_edit"
-                android:src="@drawable/vector_heart_white" />
+                android:src="@drawable/ic_heart_white" />
 
             <ImageView
                 android:id="@+id/btn_edit"
@@ -51,7 +51,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="8dp"
                 android:layout_toLeftOf="@id/btn_cart"
-                android:src="@drawable/vector_edit" />
+                android:src="@drawable/ic_edit" />
 
             <ImageView
                 android:id="@+id/btn_cart"
@@ -60,7 +60,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/vector_cart" />
+                android:src="@drawable/ic_cart" />
 
 
         </RelativeLayout>

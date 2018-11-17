@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.vector_menu);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
     }
 
     private void setupNavigationView() {

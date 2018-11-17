@@ -119,13 +119,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                         Log.d(TAG, "onClick: save" + recipe.getId());
 
                         recipeLab.addFavorite(recipe);
-                        favButton.setImageResource(R.drawable.vector_heart_red);
+                        favButton.setImageResource(R.drawable.ic_heart_red);
                         Toast.makeText(view.getContext(), mRecipe.getTitle() + " saved to favorite!", Toast.LENGTH_SHORT).show();
 
 
                     } else {
                         recipeLab.removeFromRecipe(recipe.getId());
-                        favButton.setImageResource(R.drawable.vector_heart_white);
+                        favButton.setImageResource(R.drawable.ic_heart_white);
                         Toast.makeText(view.getContext(), mRecipe.getTitle() + " was removed from favorites.", Toast.LENGTH_SHORT).show();
 
                         Log.d(TAG, "onClick: " + recipe.getId());

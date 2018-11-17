@@ -27,7 +27,7 @@
             android:layout_marginTop="13dp"
             android:layout_marginRight="19dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/vector_heart_red" />
+            android:src="@drawable/ic_heart_red" />
 
         <!--<ImageView-->
         <!--android:id="@+id/image_heart_red"-->
@@ -37,7 +37,7 @@
         <!--android:layout_marginRight="20dp"-->
         <!--android:layout_marginTop="15dp"-->
         <!--android:background="@android:color/transparent"-->
-        <!--android:src="@drawable/vector_heart_red"-->
+        <!--android:src="@drawable/ic_heart_red"-->
         <!--android:visibility="invisible" />-->
 
         <TextView

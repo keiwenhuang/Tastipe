@@ -108,7 +108,7 @@ public class RecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RecipeActivity.this, DraftsActivity.class);
-                intent.putExtra("recipe", recipe);
+                intent.putExtra(EXTRA_RECIPE, recipe);
                 startActivity(intent);
             }
         });
