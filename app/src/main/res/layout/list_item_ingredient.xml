@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/list_item_container"
+    android:layout_height="45dp">
+
+    <RelativeLayout
+        android:id="@+id/view_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/orange">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text="delete"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@color/grey_background"
+        android:id="@+id/view_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="360">
+
+        <EditText
+            android:id="@+id/edit_text_item"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="232"
+            android:hint="ingredient" />
+
+        <EditText
+            android:id="@+id/edit_text_quantity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="126"
+            android:hint="quantity" />
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>
