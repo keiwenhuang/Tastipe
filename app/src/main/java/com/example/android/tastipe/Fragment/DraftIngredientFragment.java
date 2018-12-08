@@ -11,8 +11,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.example.android.tastipe.Adapter.ListItemAdapter;
 import com.example.android.tastipe.Model.Ingredients;
@@ -33,7 +36,7 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
     private RecyclerView mRecyclerView;
     private List<Ingredients> mIngredientsList = new ArrayList<>();
     private ListItemAdapter mAdapter;
-    private FrameLayout mFrameLayout;
+    private LinearLayout mLinearLayout;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -45,8 +48,7 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
         mIngredientsList.add(new Ingredients("Bay Leaf", "5"));
         mIngredientsList.add(new Ingredients("Beef", "1"));
 
-
-        mFrameLayout = view.findViewById(R.id.list_item_container);
+        mLinearLayout = view.findViewById(R.id.container);
 
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -57,11 +59,12 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
-    }
+ }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof ListItemAdapter.ListItemViewHolder) {
+
             String name = mIngredientsList.get(viewHolder.getAdapterPosition()).getName();
 
             final Ingredients deletedItem = mIngredientsList.get(viewHolder.getAdapterPosition());
@@ -69,14 +72,14 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
 
             mAdapter.removeItem(viewHolder.getAdapterPosition());
 
-            Snackbar snackbar = Snackbar.make(mFrameLayout, name + " remove from list!", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(mLinearLayout, name + " remove from list!", Snackbar.LENGTH_LONG);
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mAdapter.restoreItem(deletedItem, deletedIndex);
                 }
             });
-            snackbar.setActionTextColor(Color.WHITE);
+            snackbar.setActionTextColor(Color.YELLOW);
             snackbar.show();
         }
     }
