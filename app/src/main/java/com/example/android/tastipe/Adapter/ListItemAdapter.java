@@ -64,7 +64,7 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ListIt
         }
 
         public void bind(Ingredients ingredients) {
-            itemIngredient.setText(ingredients.getName());
+            itemIngredient.setText(ingredients.getItemName());
 
             // TODO: set quantity
         }

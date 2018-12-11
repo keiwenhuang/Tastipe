@@ -6,8 +6,13 @@ package com.example.android.tastipe.Database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.Database.TastipeDbSchema.TastipeTable;
+import com.example.android.tastipe.Model.Ingredients;
+import com.example.android.tastipe.Model.Recipe;
+import com.example.android.tastipe.Model.Steps;
+
+import static com.example.android.tastipe.Database.TastipeDbSchema.IngredientTable;
+import static com.example.android.tastipe.Database.TastipeDbSchema.InstructionTable;
 
 public class RecipeCursorWrapper extends CursorWrapper {
     private static final String TAG = "com.example.android.tastipe.Database.RecipeCursorWrapper";
@@ -34,5 +39,33 @@ public class RecipeCursorWrapper extends CursorWrapper {
         recipe.setIngredients(ingredients);
 
         return recipe;
+    }
+
+    public Ingredients getIngredients() {
+
+        String recipeId = getString(getColumnIndex(IngredientTable.Cols.ID));
+        String item = getString(getColumnIndex(IngredientTable.Cols.ITEM));
+        String quantity = getString(getColumnIndex(IngredientTable.Cols.QUANTITY));
+
+        Ingredients ingredients = new Ingredients(recipeId);
+
+        ingredients.setItemName(item);
+        ingredients.setQuantity(quantity);
+
+        return ingredients;
+    }
+
+    public Steps getSteps() {
+
+        String recipeId = getString(getColumnIndex(InstructionTable.Cols.ID));
+        String step = getString(getColumnIndex(InstructionTable.Cols.STEP));
+        String instruction = getString(getColumnIndex(InstructionTable.Cols.INSTRUCTION));
+
+        Steps instructions = new Steps(recipeId);
+
+        instructions.setStepNumber(step);
+        instructions.setInstruction(instruction);
+
+        return instructions;
     }
 }

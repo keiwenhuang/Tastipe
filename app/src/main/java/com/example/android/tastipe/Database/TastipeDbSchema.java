@@ -18,4 +18,24 @@ public class TastipeDbSchema {
             public static final String INGREDIENTS = "ingredients";
         }
     }
+
+    public static final class IngredientTable {
+        public static final String NAME = "ingredient";
+
+        public static final class Cols {
+            public static final String ID = "id";
+            public static final String ITEM = "item";
+            public static final String QUANTITY = "quantity";
+        }
+    }
+
+    public static final class InstructionTable {
+        public static final String NAME = "instruction";
+
+        public static final class Cols {
+            public static final String ID = "id";
+            public static final String STEP = "step";
+            public static final String INSTRUCTION = "instructions";
+        }
+    }
 }

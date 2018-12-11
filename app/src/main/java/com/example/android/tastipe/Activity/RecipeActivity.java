@@ -78,11 +78,11 @@ public class RecipeActivity extends AppCompatActivity {
             for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
                 for (Steps steps : analyzedInstructions.getSteps()) {
 
-                    instructionBuilder.append(steps.getNumber() + ". " + steps.getStep() + "\n");
+                    instructionBuilder.append(steps.getStepNumber() + ". " + steps.getInstruction() + "\n");
 
                     for (Ingredients ingredients : steps.getIngredients()) {
 
-                        ingredientsBuilder.append(ingredients.getName() + "\n");
+                        ingredientsBuilder.append(ingredients.getItemName() + "\n");
 
                     }
                 }

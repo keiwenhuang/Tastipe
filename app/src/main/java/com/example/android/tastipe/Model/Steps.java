@@ -14,26 +14,43 @@ import java.util.ArrayList;
 public class Steps implements Serializable {
 
     @SerializedName("number")
-    private String number;
+    private String stepNumber;
     @SerializedName("step")
-    private String step;
+    private String instruction;
     @SerializedName("ingredients")
     private ArrayList<Ingredients> ingredients;
 
-    public String getNumber() {
-        return number;
+    private String id;
+
+    public Steps(String id) {
+        this.id = id;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public Steps() {
     }
 
-    public String getStep() {
-        return step;
+    public String getId() {
+        return id;
     }
 
-    public void setStep(String step) {
-        this.step = step;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStepNumber() {
+        return stepNumber;
+    }
+
+    public void setStepNumber(String stepNumber) {
+        this.stepNumber = stepNumber;
+    }
+
+    public String getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
     }
 
     public ArrayList<Ingredients> getIngredients() {

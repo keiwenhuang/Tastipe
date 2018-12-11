@@ -65,7 +65,7 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof ListItemAdapter.ListItemViewHolder) {
 
-            String name = mIngredientsList.get(viewHolder.getAdapterPosition()).getName();
+            String name = mIngredientsList.get(viewHolder.getAdapterPosition()).getItemName();
 
             final Ingredients deletedItem = mIngredientsList.get(viewHolder.getAdapterPosition());
             final int deletedIndex = viewHolder.getAdapterPosition();

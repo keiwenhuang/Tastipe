@@ -13,24 +13,37 @@ import java.io.Serializable;
 public class Ingredients implements Serializable {
 
     @SerializedName("name")
-    private String name;
+    private String itemName;
 
+    private String id;
     private String quantity;
+
+    public Ingredients(String id) {
+        this.id = id;
+    }
+
+    public Ingredients(String itemName, String quantity) {
+        this.itemName = itemName;
+        this.quantity = quantity;
+    }
 
     public Ingredients() {
     }
 
-    public Ingredients(String name, String quantity) {
-        this.name = name;
-        this.quantity = quantity;
+    public String getItemName() {
+        return itemName;
     }
 
-    public String getName() {
-        return name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getQuantity() {
