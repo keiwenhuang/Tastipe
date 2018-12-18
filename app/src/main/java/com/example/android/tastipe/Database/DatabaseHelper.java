@@ -18,6 +18,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "tastipe.db";
 
+
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
@@ -32,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TastipeDbSchema.TastipeTable.Cols.TITLE + "," +
                 TastipeDbSchema.TastipeTable.Cols.MINUTES + "," +
                 TastipeDbSchema.TastipeTable.Cols.SERVINGS + "," +
-                TastipeDbSchema.TastipeTable.Cols.IMAGE + "," +
+                TastipeDbSchema.TastipeTable.Cols.IMAGE_URL + "," +
                 TastipeDbSchema.TastipeTable.Cols.INGREDIENTS + "," +
                 TastipeDbSchema.TastipeTable.Cols.INSTRUCTION + ")"
         );

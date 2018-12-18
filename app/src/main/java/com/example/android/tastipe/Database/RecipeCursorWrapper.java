@@ -26,7 +26,7 @@ public class RecipeCursorWrapper extends CursorWrapper {
         String title = getString(getColumnIndex(TastipeTable.Cols.TITLE));
         String minutes = getString(getColumnIndex(TastipeTable.Cols.MINUTES));
         String servings = getString(getColumnIndex(TastipeTable.Cols.SERVINGS));
-        String image = getString(getColumnIndex(TastipeTable.Cols.IMAGE));
+        String image = getString(getColumnIndex(TastipeTable.Cols.IMAGE_URL));
         String instruction = getString(getColumnIndex(TastipeTable.Cols.INSTRUCTION));
         String ingredients = getString(getColumnIndex(TastipeTable.Cols.INGREDIENTS));
 

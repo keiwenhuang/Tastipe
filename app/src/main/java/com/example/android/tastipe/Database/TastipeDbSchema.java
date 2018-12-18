@@ -13,7 +13,7 @@ public class TastipeDbSchema {
             public static final String TITLE = "title";
             public static final String MINUTES = "minutes";
             public static final String SERVINGS = "servings";
-            public static final String IMAGE = "image";
+            public static final String IMAGE_URL = "image_url";
             public static final String INSTRUCTION = "instructions";
             public static final String INGREDIENTS = "ingredients";
         }

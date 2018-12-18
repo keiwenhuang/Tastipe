@@ -124,7 +124,7 @@ public class RecipeLab {
         values.put(TastipeTable.Cols.TITLE, recipe.getTitle());
         values.put(TastipeTable.Cols.MINUTES, recipe.getMinutes());
         values.put(TastipeTable.Cols.SERVINGS, recipe.getServings());
-        values.put(TastipeTable.Cols.IMAGE, recipe.getImage());
+        values.put(TastipeTable.Cols.IMAGE_URL, recipe.getImage());
         values.put(TastipeTable.Cols.INSTRUCTION, instructionBuilder.toString());
         values.put(TastipeTable.Cols.INGREDIENTS, ingredientsBuilder.toString());
 
