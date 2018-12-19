@@ -59,7 +59,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // Recipe table create statement
     private static final String CREATE_TABLE_RECIPE =
             "CREATE TABLE " + TABLE_RECIPE + "(" +
-                    KEY_ID + " TEXT PRIMARY KEY AUTOINCREMENT," +
+                    KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     KEY_RECIPE_ID + " TEXT," +
                     KEY_TITLE + " TEXT," +
                     KEY_SERVINGS + " TEXT," +
@@ -70,7 +70,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // Ingredient table create statement
     private static final String CREATE_TABLE_INGREDIENT =
             "CREATE TABLE " + TABLE_INGREDIENT + "(" +
-                    KEY_ID + " TEXT PRIMARY KEY AUTOINCREMENT," +
+                    KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     KEY_RECIPE_ID + " TEXT," +
                     KEY_ITEM + " TEXT," +
                     KEY_QUANTITY + " TEXT" +
@@ -79,7 +79,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // todo_tag table create statement
     private static final String CREATE_TABLE_INSTRUCTION =
             "CREATE TABLE " + TABLE_INSTRUCTION + "(" +
-                    KEY_ID + " TEXT PRIMARY KEY AUTOINCREMENT," +
+                    KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     KEY_RECIPE_ID + " TEXT," +
                     KEY_STEP_NUMBER + " TEXT," +
                     KEY_INSTRUCTION + " TEXT" +
@@ -205,7 +205,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /*
      * Deleting a recipe
      */
-    public void deleteRecipe(long recipe_id) {
+    public void deleteRecipe(String recipe_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_RECIPE, KEY_RECIPE_ID + " = ?",
                 new String[]{String.valueOf(recipe_id)});
@@ -221,6 +221,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(KEY_RECIPE_ID, recipe.getId());
 
         for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
             for (Steps steps : analyzedInstructions.getSteps()) {
@@ -276,11 +277,11 @@ public class DbHelper extends SQLiteOpenHelper {
         return db.update(TABLE_INGREDIENT, values, KEY_RECIPE_ID + " = ?",
                 new String[]{String.valueOf(ingredients.getId())});
     }
-    
+
     /*
      * Deleting an ingredient
      */
-    public void deleteIngredient(long item_id) {
+    public void deleteIngredient(String item_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_INGREDIENT, KEY_ID + " = ?",
                 new String[]{String.valueOf(item_id)});
@@ -296,12 +297,13 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(KEY_RECIPE_ID, recipe.getId());
 
         for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
             for (Steps steps : analyzedInstructions.getSteps()) {
                 values.put(KEY_STEP_NUMBER, steps.getStepNumber());
                 values.put(KEY_INSTRUCTION, steps.getInstruction());
-                db.insert(TABLE_INGREDIENT, null, values);
+                db.insert(TABLE_INSTRUCTION, null, values);
             }
         }
     }
@@ -351,7 +353,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /*
      * Deleting an instruction
      */
-    public void deleteInstruction(long instruction_id) {
+    public void deleteInstruction(String instruction_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_INSTRUCTION, KEY_ID + " = ?",
                 new String[]{String.valueOf(instruction_id)});

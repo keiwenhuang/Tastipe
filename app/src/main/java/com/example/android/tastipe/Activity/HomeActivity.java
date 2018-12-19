@@ -23,7 +23,7 @@ import com.example.android.tastipe.Adapter.PagerAdapter;
 import com.example.android.tastipe.Fragment.ArticleListFragment;
 import com.example.android.tastipe.Fragment.RecipeListFragment;
 import com.example.android.tastipe.Fragment.TipListFragment;
-import com.example.android.tastipe.Model.RecipeLab;
+import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.R;
 import com.example.android.tastipe.Utils.NavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;

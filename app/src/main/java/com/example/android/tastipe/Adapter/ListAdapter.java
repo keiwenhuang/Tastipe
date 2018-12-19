@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.tastipe.Model.Recipe;
-import com.example.android.tastipe.Model.RecipeLab;
+import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.R;
 import com.squareup.picasso.Picasso;
 
@@ -124,7 +124,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
 
                     } else {
-                        recipeLab.removeFromRecipe(recipe.getId());
+                        recipeLab.removeFromFavorites(recipe.getId());
                         favButton.setImageResource(R.drawable.ic_heart_white);
                         Toast.makeText(view.getContext(), mRecipe.getTitle() + " was removed from favorites.", Toast.LENGTH_SHORT).show();
 

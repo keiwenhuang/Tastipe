@@ -14,7 +14,7 @@ import android.view.View;
 import com.example.android.tastipe.Activity.RecipeActivity;
 import com.example.android.tastipe.Adapter.ListAdapter;
 import com.example.android.tastipe.Model.Recipe;
-import com.example.android.tastipe.Model.RecipeLab;
+import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.R;
 
 import java.util.ArrayList;
