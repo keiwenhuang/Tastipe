@@ -58,9 +58,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         if (mActivity == RECIPE) {
-            view = inflater.inflate(R.layout.layout_card_recipe, parent, false);
+            view = inflater.inflate(R.layout.card_recipe, parent, false);
         } else if (mActivity == FAVORITE) {
-            view = inflater.inflate(R.layout.layout_card_hearts, parent, false);
+            view = inflater.inflate(R.layout.card_favorite, parent, false);
         }
 
         final ListViewHolder viewHolder = new ListViewHolder(view);

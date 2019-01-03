@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Model.AnalyzedInstructions;
 import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
@@ -31,6 +32,8 @@ import java.util.List;
 public class RecipeActivity extends AppCompatActivity {
     private static final String TAG = "RecipeActivity";
     private static final String EXTRA_RECIPE = "EXTRA_RECIPE";
+
+    private DbHelper mDbHelper;
 
     private Recipe recipe;
 
@@ -69,29 +72,29 @@ public class RecipeActivity extends AppCompatActivity {
         btnCart = findViewById(R.id.btn_cart);
 
         recipe = (Recipe) getIntent().getSerializableExtra(EXTRA_RECIPE);
-
-        StringBuilder ingredientsBuilder = new StringBuilder();
-        StringBuilder instructionBuilder = new StringBuilder();
-
-        if (recipe.getIngredients() == null) {
-
-            for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
-                for (Steps steps : analyzedInstructions.getSteps()) {
-
-                    instructionBuilder.append(steps.getStepNumber() + ". " + steps.getInstruction() + "\n");
-
-                    for (Ingredients ingredients : steps.getIngredients()) {
-
-                        ingredientsBuilder.append(ingredients.getItemName() + "\n");
-
-                    }
-                }
-            }
-
-            recipe.setIngredients(String.valueOf(ingredientsBuilder));
-            recipe.setInstructions(String.valueOf(instructionBuilder));
-        }
-
+//
+//        StringBuilder ingredientsBuilder = new StringBuilder();
+//        StringBuilder instructionBuilder = new StringBuilder();
+//
+//        if (recipe.getIngredients() == null) {
+//
+//            for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
+//                for (Steps steps : analyzedInstructions.getSteps()) {
+//
+//                    instructionBuilder.append(steps.getStepNumber() + ". " + steps.getInstruction() + "\n");
+//
+//                    for (Ingredients ingredients : steps.getIngredients()) {
+//
+//                        ingredientsBuilder.append(ingredients.getItemName() + "\n");
+//
+//                    }
+//                }
+//            }
+//
+//            recipe.setIngredients(String.valueOf(ingredientsBuilder));
+//            recipe.setInstructions(String.valueOf(instructionBuilder));
+//        }
+//
         setupToolbar();
         bindRecipeData(recipe);
     }

@@ -42,11 +42,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
         switch (viewType) {
             case ARTICLE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_article, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_article, parent, false);
                 break;
 
             case RECIPE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card_recipe, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_recipe, parent, false);
                 break;
         }
 

@@ -4,4 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <include layout="@layout/snippet_toolbar_grocery" />
+
+    <include layout="@layout/layout_fragment_container" />
+
 </FrameLayout>

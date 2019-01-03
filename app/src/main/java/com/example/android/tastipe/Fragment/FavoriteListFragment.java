@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class FavoriteListFragment extends DefaultFragment {
     private static final String TAG = "FavoriteListFragment";
+
     private static final int ACTIVITY_NUM = 2;
 
     private RecyclerView mRecyclerView;
@@ -40,13 +41,16 @@ public class FavoriteListFragment extends DefaultFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         generateRecipeList();
-//        setupAdapter();
+
     }
 
     private void generateRecipeList() {
         RecipeLab recipeLab = RecipeLab.get(getActivity());
+
         recipeList = recipeLab.getRecipes();
+
         mRecyclerView = getView().findViewById(R.id.recyclerView);
+
         adapter = new ListAdapter(recipeList, ACTIVITY_NUM);
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
@@ -54,17 +58,10 @@ public class FavoriteListFragment extends DefaultFragment {
                 startActivity(RecipeActivity.newIntent(getActivity(), recipe));
             }
         });
+
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(adapter);
-    }
-
-    private void setupAdapter() {
-        RecipeLab recipeLab = RecipeLab.get(getActivity());
-        recipeList = recipeLab.getRecipes();
-        if (isAdded()) {
-            mRecyclerView.setAdapter(new ListAdapter(recipeList, ACTIVITY_NUM));
-        }
     }
 }

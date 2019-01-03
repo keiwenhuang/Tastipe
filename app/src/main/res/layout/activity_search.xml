@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/snippet_home_toolbar" />
+    <include layout="@layout/snippet_toolbar_home" />
 
     <include layout="@layout/layout_top_navigation_view" />
 
