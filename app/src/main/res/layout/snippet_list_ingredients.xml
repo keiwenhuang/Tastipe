@@ -19,18 +19,7 @@
         <ListView
             android:id="@+id/list_ingredients"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tvIngredients" />
-
-        <TextView
-            android:id="@+id/tvIngredients"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvIngredients"
-            android:fontFamily="@font/athelas_regular"
-            android:text="ingredients ingredients ingredients ingredients ingredients "
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </merge>

@@ -29,6 +29,11 @@ public class Steps implements Serializable {
     public Steps() {
     }
 
+    public Steps(String stepNumber, String instruction) {
+        this.stepNumber = stepNumber;
+        this.instruction = instruction;
+    }
+
     public String getId() {
         return id;
     }
@@ -59,5 +64,10 @@ public class Steps implements Serializable {
 
     public void setIngredients(ArrayList<Ingredients> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    @Override
+    public String toString() {
+        return stepNumber + ". " + instruction;
     }
 }

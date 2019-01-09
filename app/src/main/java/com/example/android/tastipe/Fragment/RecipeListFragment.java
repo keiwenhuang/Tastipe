@@ -21,6 +21,7 @@ import com.example.android.tastipe.Network.RecipeApi;
 import com.example.android.tastipe.Network.RecipeList;
 import com.example.android.tastipe.Network.RetrofitInstance;
 import com.example.android.tastipe.R;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
@@ -76,6 +77,7 @@ public class RecipeListFragment extends DefaultFragment {
             @Override
             public void onResponse(Call<RecipeList> call, Response<RecipeList> response) {
                 Log.d(TAG, "onResponse: " + response.body().getRecipeArrayList());
+                Log.d("2.0 getFeed > ", new GsonBuilder().setPrettyPrinting().create().toJson(response));
                 mProgressBar.setVisibility(View.GONE);
 
                 ArrayList<Recipe> recipeLists = response.body().getRecipeArrayList();

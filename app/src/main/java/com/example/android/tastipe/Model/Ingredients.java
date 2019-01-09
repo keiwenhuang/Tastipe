@@ -18,16 +18,17 @@ public class Ingredients implements Serializable {
     private String id;
     private String quantity;
 
-    public Ingredients(String id) {
-        this.id = id;
-    }
-
     public Ingredients(String itemName, String quantity) {
         this.itemName = itemName;
         this.quantity = quantity;
     }
 
+    public Ingredients(String itemName) {
+        this.itemName = itemName;
+    }
+
     public Ingredients() {
+
     }
 
     public String getItemName() {
@@ -52,5 +53,24 @@ public class Ingredients implements Serializable {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return itemName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() == this.getClass()) {
+            Ingredients ingredients = (Ingredients) obj;
+            return  ingredients.getItemName().equals((getItemName()));
+        } else {
+            return false;
+        }
     }
 }

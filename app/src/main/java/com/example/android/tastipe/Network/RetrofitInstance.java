@@ -3,6 +3,8 @@ package com.example.android.tastipe.Network;
  * Created by kevin on 10/21/18.
  */
 
+import android.util.Log;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

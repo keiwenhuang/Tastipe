@@ -12,28 +12,27 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Model.AnalyzedInstructions;
 import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.Model.Steps;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.ListUtils;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RecipeActivity extends AppCompatActivity {
     private static final String TAG = "RecipeActivity";
     private static final String EXTRA_RECIPE = "EXTRA_RECIPE";
-
-    private DbHelper mDbHelper;
 
     private Recipe recipe;
 
@@ -41,12 +40,20 @@ public class RecipeActivity extends AppCompatActivity {
     private TextView cookTimeText;
     private TextView servingText;
     private ImageView recipeImage;
-    private TextView ingredientText;
-    private TextView instructionText;
 
     private ImageView btnBack;
     private ImageView btnEdit;
     private ImageView btnCart;
+
+    private ListView ingredientListView, instructionListView;
+
+    private List<Ingredients> mIngredientsList = new ArrayList<>();
+    private List<Steps> mStepsList = new ArrayList<>();
+
+//    private String [] itemList = {"Apple", "Pineapple", "Orange", "Apple"};
+
+//    private Set<Ingredients> mIngredientsSet = new HashSet<>();
+//    private Set<Steps> mStepsSet = new HashSet<>();
 
 
     public static Intent newIntent(Context context, Recipe recipe) {
@@ -60,43 +67,70 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+        ingredientListView = findViewById(R.id.list_ingredients);
+        instructionListView = findViewById(R.id.list_instructions);
+
         titleText = findViewById(R.id.recipe_title);
         cookTimeText = findViewById(R.id.cooking_time);
         servingText = findViewById(R.id.servings);
         recipeImage = findViewById(R.id.recipe_image);
-        ingredientText = findViewById(R.id.tvIngredients);
-        instructionText = findViewById(R.id.tvInstructions);
 
         btnBack = findViewById(R.id.btn_back);
         btnEdit = findViewById(R.id.btn_edit);
         btnCart = findViewById(R.id.btn_cart);
 
         recipe = (Recipe) getIntent().getSerializableExtra(EXTRA_RECIPE);
+
+        if (recipe.getIngredients() == null) {
+
+            for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
+                for (Steps steps : analyzedInstructions.getSteps()) {
+
+                    String instruction = steps.getInstruction();
+
+                    mStepsList.add(new Steps(steps.getStepNumber(), instruction));
+
+                    for (Ingredients ingredients : steps.getIngredients()) {
+
+                        Log.d(TAG, "onCreate: list, " + mIngredientsList.toString());
+
+                        Ingredients item = new Ingredients(ingredients.getItemName().trim());
+                        Log.d(TAG, "onCreate: item, " + item);
+
+                        boolean isContained = mIngredientsList.contains(item);
+                        Log.d(TAG, "onCreate: isContained: " + isContained);
+
+                        if (isContained) {
+                            Log.d(TAG, "onCreate: already has item in the list: " + item);
+                        } else {
+                            mIngredientsList.add(item);
+                        }
 //
-//        StringBuilder ingredientsBuilder = new StringBuilder();
-//        StringBuilder instructionBuilder = new StringBuilder();
+//                        Log.d(TAG, "onCreate: item, " + item);
+//                        Log.d(TAG, "onCreate: list contains: " + mIngredientsList.toString());
 //
-//        if (recipe.getIngredients() == null) {
+//                        if (!mIngredientsList.contains(item)) {
 //
-//            for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
-//                for (Steps steps : analyzedInstructions.getSteps()) {
+//                            Log.d(TAG, "onCreate: " + mIngredientsList.contains(item));
+//                            mIngredientsList.add(item);
 //
-//                    instructionBuilder.append(steps.getStepNumber() + ". " + steps.getInstruction() + "\n");
-//
-//                    for (Ingredients ingredients : steps.getIngredients()) {
-//
-//                        ingredientsBuilder.append(ingredients.getItemName() + "\n");
-//
-//                    }
-//                }
-//            }
-//
-//            recipe.setIngredients(String.valueOf(ingredientsBuilder));
-//            recipe.setInstructions(String.valueOf(instructionBuilder));
-//        }
-//
+//                        } else {
+//                            Log.d(TAG, "onCreate: item duplicated: " + item);
+//                        }
+                    }
+
+                }
+            }
+        }
+
         setupToolbar();
         bindRecipeData(recipe);
+
+        ingredientListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mIngredientsList));
+        instructionListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mStepsList));
+
+        ListUtils.setDynamicHeight(ingredientListView);
+        ListUtils.setDynamicHeight(instructionListView);
     }
 
     private void setupToolbar() {
@@ -123,8 +157,6 @@ public class RecipeActivity extends AppCompatActivity {
         cookTimeText.setText(recipe.getMinutes() + " mins");
         servingText.setText(recipe.getServings() + " servings");
         Picasso.get().load(Uri.parse(recipe.getImage())).into(recipeImage);
-        ingredientText.setText(recipe.getIngredients());
-        instructionText.setText(recipe.getInstructions());
 
     }
 }
