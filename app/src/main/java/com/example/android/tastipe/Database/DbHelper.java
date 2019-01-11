@@ -135,8 +135,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public Recipe getRecipe(long recipe_id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_RECIPE + " WHERE "
-                + KEY_RECIPE_ID + " = " + recipe_id;
+        String selectQuery = "SELECT  * FROM " + TABLE_RECIPE + " WHERE " + KEY_RECIPE_ID + " = " + recipe_id;
 
         Log.e(TAG, selectQuery);
 
@@ -238,9 +237,10 @@ public class DbHelper extends SQLiteOpenHelper {
     /*
      * getting all ingredients
      * */
-    public List<Ingredients> getAllIngredients() {
+    public List<Ingredients> getAllIngredients(String recipeId) {
         List<Ingredients> ingredientsList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_INGREDIENT;
+        String selectQuery = "SELECT  * FROM " + TABLE_INGREDIENT + " WHERE " + KEY_RECIPE_ID + " = " + recipeId;
+
 
         Log.e(TAG, selectQuery);
 
@@ -311,9 +311,9 @@ public class DbHelper extends SQLiteOpenHelper {
     /*
      * getting all ingredients
      * */
-    public List<Steps> getAllSteps() {
+    public List<Steps> getAllSteps(String recipeId) {
         List<Steps> steps = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_INSTRUCTION;
+        String selectQuery = "SELECT  * FROM " + TABLE_INSTRUCTION + " WHERE " + KEY_RECIPE_ID + " = " + recipeId;
 
         Log.e(TAG, selectQuery);
 

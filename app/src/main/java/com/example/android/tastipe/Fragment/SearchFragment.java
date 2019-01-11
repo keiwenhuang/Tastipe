@@ -8,16 +8,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -26,16 +23,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.tastipe.Activity.RecipeActivity;
-import com.example.android.tastipe.Adapter.FilterAdapter;
 import com.example.android.tastipe.Adapter.ListAdapter;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.Network.RecipeApi;
-import com.example.android.tastipe.Network.RecipeList;
 import com.example.android.tastipe.Network.ResultList;
 import com.example.android.tastipe.Network.RetrofitInstance;
 import com.example.android.tastipe.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,6 +42,8 @@ import retrofit2.Response;
 public class SearchFragment extends DefaultFragment {
     private static final String TAG = "SearchFragment";
     public static final int RECIPE_GENERATED = 10;
+    private static final int REQUEST_CODE = 2;
+    private static final int ACTIVITY_NUM = 2;
 
 //    private RecyclerView mCuisineRecyclerView, mDietRecyclerView, mAllergyRecyclerView;
 //    private RecyclerView.Adapter mCuisineAdapter, mDietAdapter, mAllergyAdapter;
@@ -158,14 +154,17 @@ public class SearchFragment extends DefaultFragment {
     }
 
     private void generateRecipeList(List<Recipe> recipeArrayList) {
-        adapter = new ListAdapter(recipeArrayList, 2);
+
+        adapter = new ListAdapter(recipeArrayList, ACTIVITY_NUM);
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {
                 Log.d(TAG, "onItemClick: " + recipe);
-                startActivity(RecipeActivity.newIntent(getActivity(), recipe));
+                startActivity(RecipeActivity.newIntent(getActivity(), recipe, REQUEST_CODE));
             }
         });
+
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

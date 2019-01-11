@@ -36,7 +36,8 @@ public class RecipeListFragment extends DefaultFragment {
     private static final String TAG = "RecipeListFragment";
 
     private static final int ACTIVITY_NUM = 1;
-    public static final int RECIPE_GENERATED = 10;
+    private static final int RECIPE_GENERATED = 10;
+    private static final int REQUEST_CODE = 0;
 
     private RecyclerView mRecyclerView;
     private ListAdapter adapter;
@@ -96,13 +97,15 @@ public class RecipeListFragment extends DefaultFragment {
     private void generateRecipeList(ArrayList<Recipe> recipeArrayList) {
         Log.d(TAG, "generateRecipeList: ");
         mRecyclerView = getView().findViewById(R.id.recyclerView);
+
         adapter = new ListAdapter(recipeArrayList, ACTIVITY_NUM);
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {
-                startActivity(RecipeActivity.newIntent(getActivity(), recipe));
+                startActivity(RecipeActivity.newIntent(getActivity(), recipe, REQUEST_CODE));
             }
         });
+
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);

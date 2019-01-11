@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Recipe implements Serializable {
 
@@ -32,8 +33,11 @@ public class Recipe implements Serializable {
     /**
      * fetch from api and save to the following
      */
-    private String instructions;
-    private String ingredients;
+//    private String instructions;
+//    private String ingredients;
+
+    private List<Ingredients> mIngredientsList = new ArrayList<>();
+    private List<Steps> mInstructionList = new ArrayList<>();
 
     public Recipe() {
     }
@@ -90,21 +94,36 @@ public class Recipe implements Serializable {
         this.analyzedInstructions = analyzedInstructions;
     }
 
-    public String getInstructions() {
-        return instructions;
+    public List<Ingredients> getIngredientsList() {
+        return mIngredientsList;
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
+    public void setIngredientsList(List<Ingredients> ingredientsList) {
+        mIngredientsList = ingredientsList;
     }
 
-    public String getIngredients() {
-        return ingredients;
+    public List<Steps> getInstructionList() {
+        return mInstructionList;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
+    public void setInstructionList(List<Steps> instructionList) {
+        mInstructionList = instructionList;
     }
+    //    public String getInstructions() {
+//        return instructions;
+//    }
+//
+//    public void setInstructions(String instructions) {
+//        this.instructions = instructions;
+//    }
+//
+//    public String getIngredients() {
+//        return ingredients;
+//    }
+//
+//    public void setIngredients(String ingredients) {
+//        this.ingredients = ingredients;
+//    }
 
     //    public List<String> getSteps() {
 //        return steps;

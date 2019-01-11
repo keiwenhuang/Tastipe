@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Model.AnalyzedInstructions;
 import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
@@ -26,39 +27,30 @@ import com.example.android.tastipe.Utils.ListUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class RecipeActivity extends AppCompatActivity {
     private static final String TAG = "RecipeActivity";
     private static final String EXTRA_RECIPE = "EXTRA_RECIPE";
+    private static final String REQUEST_CODE = "REQUEST_CODE";
 
     private Recipe recipe;
+    private RecipeLab mRecipeLab;
 
-    private TextView titleText;
-    private TextView cookTimeText;
-    private TextView servingText;
+    private TextView titleText, cookTimeText, servingText;
     private ImageView recipeImage;
 
-    private ImageView btnBack;
-    private ImageView btnEdit;
-    private ImageView btnCart;
+    private ImageView btnBack, btnEdit, btnCart;
 
     private ListView ingredientListView, instructionListView;
 
     private List<Ingredients> mIngredientsList = new ArrayList<>();
     private List<Steps> mStepsList = new ArrayList<>();
 
-//    private String [] itemList = {"Apple", "Pineapple", "Orange", "Apple"};
-
-//    private Set<Ingredients> mIngredientsSet = new HashSet<>();
-//    private Set<Steps> mStepsSet = new HashSet<>();
-
-
-    public static Intent newIntent(Context context, Recipe recipe) {
+    public static Intent newIntent(Context context, Recipe recipe, int requestCode) {
         Intent intent = new Intent(context, RecipeActivity.class);
         intent.putExtra(EXTRA_RECIPE, recipe);
+        intent.putExtra(REQUEST_CODE, requestCode);
         return intent;
     }
 
@@ -80,47 +72,20 @@ public class RecipeActivity extends AppCompatActivity {
         btnCart = findViewById(R.id.btn_cart);
 
         recipe = (Recipe) getIntent().getSerializableExtra(EXTRA_RECIPE);
+        String recipeId = recipe.getId();
 
-        if (recipe.getIngredients() == null) {
+        if (getIntent().getExtras().getInt(REQUEST_CODE) == 0) { // intent from RecipeListFragment
 
-            for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
-                for (Steps steps : analyzedInstructions.getSteps()) {
+            fetchListFromApi(recipe);
 
-                    String instruction = steps.getInstruction();
+        } else if (getIntent().getExtras().getInt(REQUEST_CODE) == 1) { // intent from FavoriteListFragment
 
-                    mStepsList.add(new Steps(steps.getStepNumber(), instruction));
+            fetchListFromDatabase(recipeId);
 
-                    for (Ingredients ingredients : steps.getIngredients()) {
+        } else {
 
-                        Log.d(TAG, "onCreate: list, " + mIngredientsList.toString());
+            fetchListFromSearch(recipe);
 
-                        Ingredients item = new Ingredients(ingredients.getItemName().trim());
-                        Log.d(TAG, "onCreate: item, " + item);
-
-                        boolean isContained = mIngredientsList.contains(item);
-                        Log.d(TAG, "onCreate: isContained: " + isContained);
-
-                        if (isContained) {
-                            Log.d(TAG, "onCreate: already has item in the list: " + item);
-                        } else {
-                            mIngredientsList.add(item);
-                        }
-//
-//                        Log.d(TAG, "onCreate: item, " + item);
-//                        Log.d(TAG, "onCreate: list contains: " + mIngredientsList.toString());
-//
-//                        if (!mIngredientsList.contains(item)) {
-//
-//                            Log.d(TAG, "onCreate: " + mIngredientsList.contains(item));
-//                            mIngredientsList.add(item);
-//
-//                        } else {
-//                            Log.d(TAG, "onCreate: item duplicated: " + item);
-//                        }
-                    }
-
-                }
-            }
         }
 
         setupToolbar();
@@ -131,6 +96,37 @@ public class RecipeActivity extends AppCompatActivity {
 
         ListUtils.setDynamicHeight(ingredientListView);
         ListUtils.setDynamicHeight(instructionListView);
+    }
+
+    private void fetchListFromSearch(Recipe recipe) {
+    }
+
+    private void fetchListFromDatabase(String recipeId) {
+        mRecipeLab = new RecipeLab(getApplicationContext());
+
+        mIngredientsList = mRecipeLab.getIngredients(recipeId);
+        mStepsList = mRecipeLab.getInstructions(recipeId);
+    }
+
+    private void fetchListFromApi(Recipe recipe) {
+        for (AnalyzedInstructions analyzedInstructions : recipe.getAnalyzedInstructions()) {
+            for (Steps steps : analyzedInstructions.getSteps()) {
+
+                String instruction = steps.getInstruction();
+                mStepsList.add(new Steps(steps.getStepNumber(), instruction));
+
+                for (Ingredients ingredients : steps.getIngredients()) {
+
+                    Ingredients item = new Ingredients(ingredients.getItemName().trim());
+
+                    if (!mIngredientsList.contains(item)) {
+                        mIngredientsList.add(item);
+                    } else {
+                        Log.d(TAG, "onCreate: already has item in the list: " + item);
+                    }
+                }
+            }
+        }
     }
 
     private void setupToolbar() {

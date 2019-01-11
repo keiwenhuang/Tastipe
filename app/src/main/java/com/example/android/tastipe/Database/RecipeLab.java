@@ -6,7 +6,9 @@ package com.example.android.tastipe.Database;
 
 import android.content.Context;
 
+import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
+import com.example.android.tastipe.Model.Steps;
 
 import java.util.List;
 
@@ -50,6 +52,20 @@ public class RecipeLab {
         DbHelper dbHelper = new DbHelper(mContext);
 
         return dbHelper.getAllRecipes();
+    }
+
+    public List<Ingredients> getIngredients(String recipeId) {
+
+        DbHelper dbHelper = new DbHelper(mContext);
+
+        return dbHelper.getAllIngredients(recipeId);
+    }
+
+    public List<Steps> getInstructions(String recipeId) {
+
+        DbHelper dbHelper = new DbHelper(mContext);
+
+        return dbHelper.getAllSteps(recipeId);
     }
 
     public boolean isFavorite(Recipe checkItem) {
