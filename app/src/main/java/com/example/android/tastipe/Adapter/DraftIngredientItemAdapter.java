@@ -20,25 +20,25 @@ import java.util.List;
 /**
  * TODO: Add a class header comment!
  */
-public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ListItemViewHolder> {
-    private static final String TAG = "ListItemAdapter";
+public class DraftIngredientItemAdapter extends RecyclerView.Adapter<DraftIngredientItemAdapter.ListItemViewHolder> {
+    private static final String TAG = "DraftIngredientItemAdapter";
 
     private List<Ingredients> mIngredientsList;
 
-    public ListItemAdapter(List<Ingredients> ingredientsList) {
+    public DraftIngredientItemAdapter(List<Ingredients> ingredientsList) {
         mIngredientsList = ingredientsList;
     }
 
     @NonNull
     @Override
-    public ListItemAdapter.ListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DraftIngredientItemAdapter.ListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_ingredient, parent, false);
         ListItemViewHolder viewHolder = new ListItemViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListItemAdapter.ListItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DraftIngredientItemAdapter.ListItemViewHolder holder, int position) {
         Ingredients ingredients = mIngredientsList.get(position);
         holder.bind(ingredients);
     }

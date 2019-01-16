@@ -47,6 +47,13 @@ public class RecipeLab {
         dbHelper.deleteInstruction(id);
     }
 
+    public Recipe getRecipe(String recipeId) {
+
+        DbHelper dbHelper = new DbHelper(mContext);
+
+        return dbHelper.getRecipe(recipeId);
+    }
+
     public List<Recipe> getRecipes() {
 
         DbHelper dbHelper = new DbHelper(mContext);

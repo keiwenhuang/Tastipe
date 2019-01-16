@@ -132,7 +132,7 @@ public class DbHelper extends SQLiteOpenHelper {
     /*
      * get single recipe
      */
-    public Recipe getRecipe(long recipe_id) {
+    public Recipe getRecipe(String recipe_id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String selectQuery = "SELECT  * FROM " + TABLE_RECIPE + " WHERE " + KEY_RECIPE_ID + " = " + recipe_id;

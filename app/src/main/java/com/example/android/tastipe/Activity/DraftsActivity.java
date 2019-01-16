@@ -9,7 +9,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.android.tastipe.Adapter.PagerAdapter;
 import com.example.android.tastipe.Fragment.DraftInfoFragment;
@@ -17,6 +22,8 @@ import com.example.android.tastipe.Fragment.DraftIngredientFragment;
 import com.example.android.tastipe.Fragment.DraftInstructionFragment;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.R;
+
+import java.util.Objects;
 
 /**
  * TODO: Add a class header comment!
@@ -27,6 +34,8 @@ public class DraftsActivity extends AppCompatActivity {
 
     private Recipe mRecipe;
 
+    private ImageView backBtn, saveBtn;
+
     private DraftInfoFragment mInfoFragment = new DraftInfoFragment();
     private DraftIngredientFragment mIngredientFragment  = new DraftIngredientFragment();
     private DraftInstructionFragment mInstructionFragment = new DraftInstructionFragment();
@@ -36,6 +45,9 @@ public class DraftsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_drafts);
 
+        backBtn = findViewById(R.id.back_arrow);
+        saveBtn = findViewById(R.id.save_button);
+
         Intent intent = getIntent();
         mRecipe = (Recipe) intent.getSerializableExtra(EXTRA_RECIPE);
 
@@ -43,7 +55,32 @@ public class DraftsActivity extends AppCompatActivity {
         mIngredientFragment.putArguments(mRecipe);
         mInstructionFragment.putArguments(mRecipe);
 
+        setupToolbar();
         setupViewPager();
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.draft_toolbar);
+        setSupportActionBar(toolbar);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DraftsActivity.this, "Draft saved!", Toast.LENGTH_SHORT).show();
+                saveRecipe();
+            }
+        });
+    }
+
+    private void saveRecipe() {
+
     }
 
     private void setupViewPager() {
@@ -59,8 +96,8 @@ public class DraftsActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setText("1");
-        tabLayout.getTabAt(1).setText("2");
-        tabLayout.getTabAt(2).setText("3");
+        Objects.requireNonNull(tabLayout.getTabAt(0)).setText("1");
+        Objects.requireNonNull(tabLayout.getTabAt(1)).setText("2");
+        Objects.requireNonNull(tabLayout.getTabAt(2)).setText("3");
     }
 }

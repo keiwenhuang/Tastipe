@@ -11,13 +11,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.android.tastipe.Adapter.ListItemAdapter;
+import com.example.android.tastipe.Adapter.DraftIngredientItemAdapter;
+import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.R;
@@ -32,21 +31,24 @@ import java.util.List;
 public class DraftIngredientFragment extends DefaultFragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
     private Recipe mRecipe;
+    private RecipeLab mRecipeLab;
 
-    private RecyclerView mRecyclerView;
     private List<Ingredients> mIngredientsList = new ArrayList<>();
-    private ListItemAdapter mAdapter;
+    private RecyclerView mRecyclerView;
+    private DraftIngredientItemAdapter mAdapter;
     private LinearLayout mLinearLayout;
+
+    private ImageView btnAddNewItem;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        btnAddNewItem = view.findViewById(R.id.btn_add);
 
-        mIngredientsList.add(new Ingredients("Apple", "2"));
-        mIngredientsList.add(new Ingredients("Onion", "0.5"));
-        mIngredientsList.add(new Ingredients("Bay Leaf", "5"));
-        mIngredientsList.add(new Ingredients("Beef", "1"));
+        mRecipeLab = new RecipeLab(getContext());
+
+        mIngredientsList = mRecipeLab.getIngredients(mRecipe.getId());
 
         mLinearLayout = view.findViewById(R.id.container);
 
@@ -54,8 +56,16 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mAdapter = new ListItemAdapter(mIngredientsList);
+        mAdapter = new DraftIngredientItemAdapter(mIngredientsList);
         mRecyclerView.setAdapter(mAdapter);
+
+        btnAddNewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIngredientsList.add(new Ingredients());
+                mAdapter.notifyItemInserted(mIngredientsList.size() - 1);
+            }
+        });
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
@@ -63,7 +73,7 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if (viewHolder instanceof ListItemAdapter.ListItemViewHolder) {
+        if (viewHolder instanceof DraftIngredientItemAdapter.ListItemViewHolder) {
 
             String name = mIngredientsList.get(viewHolder.getAdapterPosition()).getItemName();
 
