@@ -7,6 +7,7 @@ import com.example.android.tastipe.Model.Recipe;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TODO: Add a class header comment!
@@ -14,13 +15,13 @@ import java.util.ArrayList;
 public class RecipeList {
 
     @SerializedName("recipes")
-    private ArrayList<Recipe> recipeList;
+    private List<Recipe> recipeList;
 
-    public ArrayList<Recipe> getRecipeArrayList() {
+    public List<Recipe> getRecipeArrayList() {
         return recipeList;
     }
 
-    public void setRecipeArrayList(ArrayList<Recipe> recipeArrayList) {
+    public void setRecipeArrayList(List<Recipe> recipeArrayList) {
         this.recipeList = recipeArrayList;
     }
 }

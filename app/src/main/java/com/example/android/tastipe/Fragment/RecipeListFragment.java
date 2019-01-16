@@ -24,6 +24,7 @@ import com.example.android.tastipe.R;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,6 +43,8 @@ public class RecipeListFragment extends DefaultFragment {
     private RecyclerView mRecyclerView;
     private ListAdapter adapter;
     private ProgressBar mProgressBar;
+
+    private List<Recipe> recipeLists = new ArrayList<>();
 
     @Override
     protected int layoutRes() {
@@ -81,7 +84,7 @@ public class RecipeListFragment extends DefaultFragment {
                 Log.d("2.0 getFeed > ", new GsonBuilder().setPrettyPrinting().create().toJson(response));
                 mProgressBar.setVisibility(View.GONE);
 
-                ArrayList<Recipe> recipeLists = response.body().getRecipeArrayList();
+                recipeLists = response.body().getRecipeArrayList();
                 generateRecipeList(recipeLists);
             }
 
@@ -94,7 +97,7 @@ public class RecipeListFragment extends DefaultFragment {
         });
     }
 
-    private void generateRecipeList(ArrayList<Recipe> recipeArrayList) {
+    private void generateRecipeList(List<Recipe> recipeArrayList) {
         Log.d(TAG, "generateRecipeList: ");
         mRecyclerView = getView().findViewById(R.id.recyclerView);
 
