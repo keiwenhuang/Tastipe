@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Model.AnalyzedInstructions;
 import com.example.android.tastipe.Model.Ingredients;
@@ -104,8 +105,8 @@ public class RecipeActivity extends AppCompatActivity {
     private void fetchListFromDatabase(String recipeId) {
         mRecipeLab = new RecipeLab(getApplicationContext());
 
-        mIngredientsList = mRecipeLab.getIngredients(recipeId);
-        mStepsList = mRecipeLab.getInstructions(recipeId);
+        mIngredientsList = mRecipeLab.getIngredients(recipeId, DbHelper.TableType.FAVORITE_TABLE);
+        mStepsList = mRecipeLab.getInstructions(recipeId, DbHelper.TableType.FAVORITE_TABLE);
     }
 
     private void fetchListFromApi(Recipe recipe) {

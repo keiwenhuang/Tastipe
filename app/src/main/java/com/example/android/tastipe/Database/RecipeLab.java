@@ -30,18 +30,18 @@ public class RecipeLab {
         mContext = context.getApplicationContext();
     }
 
-    public void addFavorite(Recipe recipe) {
+    public void addFavorite(Recipe recipe, String database) {
 
-        DbHelper dbHelper = new DbHelper(mContext);
+        DbHelper dbHelper = new DbHelper(mContext, database);
 
         dbHelper.createRecipe(recipe);
         dbHelper.createIngredient(recipe);
         dbHelper.createInstruction(recipe);
     }
 
-    public void removeFromFavorites(String id) {
+    public void removeFromFavorites(String id, String database) {
 
-        DbHelper dbHelper = new DbHelper(mContext);
+        DbHelper dbHelper = new DbHelper(mContext, database);
         dbHelper.deleteRecipe(id);
         dbHelper.deleteIngredient(id);
         dbHelper.deleteInstruction(id);
@@ -49,28 +49,28 @@ public class RecipeLab {
 
     public Recipe getRecipe(String recipeId) {
 
-        DbHelper dbHelper = new DbHelper(mContext);
+        DbHelper dbHelper = new DbHelper(mContext, DbHelper.TableType.FAVORITE_TABLE);
 
         return dbHelper.getRecipe(recipeId);
     }
 
-    public List<Recipe> getRecipes() {
+    public List<Recipe> getRecipes(String database) {
 
-        DbHelper dbHelper = new DbHelper(mContext);
+        DbHelper dbHelper = new DbHelper(mContext, database);
 
         return dbHelper.getAllRecipes();
     }
 
-    public List<Ingredients> getIngredients(String recipeId) {
+    public List<Ingredients> getIngredients(String recipeId, String database) {
 
-        DbHelper dbHelper = new DbHelper(mContext);
+        DbHelper dbHelper = new DbHelper(mContext, database);
 
         return dbHelper.getAllIngredients(recipeId);
     }
 
-    public List<Steps> getInstructions(String recipeId) {
+    public List<Steps> getInstructions(String recipeId, String database) {
 
-        DbHelper dbHelper = new DbHelper(mContext);
+        DbHelper dbHelper = new DbHelper(mContext, database);
 
         return dbHelper.getAllSteps(recipeId);
     }
@@ -79,7 +79,7 @@ public class RecipeLab {
         RecipeLab recipeLab = new RecipeLab(mContext);
 
         boolean check = false;
-        List<Recipe> recipeList = recipeLab.getRecipes();
+        List<Recipe> recipeList = recipeLab.getRecipes(DbHelper.TableType.FAVORITE_TABLE);
         if (recipeList != null) {
             for (Recipe recipe : recipeList) {
                 String id = recipe.getId();

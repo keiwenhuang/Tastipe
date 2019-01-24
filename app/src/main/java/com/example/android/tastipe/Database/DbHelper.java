@@ -29,9 +29,6 @@ public class DbHelper extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
-    // Database Name
-    private static final String DATABASE_NAME = "tastipeApp";
-
     // Table Names
     private static final String TABLE_RECIPE = "recipe";
     private static final String TABLE_INGREDIENT = "ingredient";
@@ -85,8 +82,9 @@ public class DbHelper extends SQLiteOpenHelper {
                     KEY_INSTRUCTION + " TEXT" +
                     ")";
 
-    public DbHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public DbHelper(@Nullable Context context, @Nullable String name) {
+        super(context, name, null, DATABASE_VERSION);
+
     }
 
     @Override
@@ -357,5 +355,12 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_INSTRUCTION, KEY_ID + " = ?",
                 new String[]{String.valueOf(instruction_id)});
+    }
+
+    public class TableType {
+
+        public static final String FAVORITE_TABLE = "FAVORITE";
+        public static final String COOKBOOK_TABLE = "COOKBOOK";
+
     }
 }

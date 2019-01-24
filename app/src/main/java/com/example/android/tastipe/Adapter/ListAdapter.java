@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.R;
@@ -118,13 +119,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
                         Log.d(TAG, "onClick: save" + recipe.getId());
 
-                        recipeLab.addFavorite(recipe);
+                        recipeLab.addFavorite(recipe, DbHelper.TableType.FAVORITE_TABLE);
                         favButton.setImageResource(R.drawable.ic_heart_red);
                         Toast.makeText(view.getContext(), mRecipe.getTitle() + " saved to favorite!", Toast.LENGTH_SHORT).show();
 
 
                     } else {
-                        recipeLab.removeFromFavorites(recipe.getId());
+                        recipeLab.removeFromFavorites(recipe.getId(), DbHelper.TableType.FAVORITE_TABLE);
                         favButton.setImageResource(R.drawable.ic_heart_white);
                         Toast.makeText(view.getContext(), mRecipe.getTitle() + " was removed from favorites.", Toast.LENGTH_SHORT).show();
 

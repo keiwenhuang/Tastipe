@@ -26,6 +26,10 @@ import java.util.List;
 public class FavoriteListFragment extends DefaultFragment {
     private static final String TAG = "FavoriteListFragment";
 
+    // Database Name
+    private static final String DATABASE_FAVORITE = "FAVORITE";
+    private static final String DATABASE_COOKBOOK = "COOKBOOK";
+
     private static final int ACTIVITY_NUM = 2;
     private static final int REQUEST_CODE = 1;
 
@@ -48,7 +52,7 @@ public class FavoriteListFragment extends DefaultFragment {
     private void generateRecipeList() {
         RecipeLab recipeLab = RecipeLab.get(getActivity());
 
-        recipeList = recipeLab.getRecipes();
+        recipeList = recipeLab.getRecipes(DATABASE_FAVORITE);
 
         mRecyclerView = getView().findViewById(R.id.recyclerView);
 
