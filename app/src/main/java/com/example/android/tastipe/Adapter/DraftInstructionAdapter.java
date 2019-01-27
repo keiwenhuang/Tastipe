@@ -41,7 +41,6 @@ public class DraftInstructionAdapter extends RecyclerView.Adapter<DraftInstructi
     @Override
     public void onBindViewHolder(@NonNull DraftInstructionAdapter.DraftInstructionViewHolder holder, final int position) {
         final Steps instructions = mInstructionList.get(position);
-//        holder.bind(instructions);
 
         holder.editTextInstruction.addTextChangedListener(new TextWatcher() {
             @Override
@@ -90,10 +89,6 @@ public class DraftInstructionAdapter extends RecyclerView.Adapter<DraftInstructi
             ivInstruction = itemView.findViewById(R.id.iv_instruction);
             btnCamera = itemView.findViewById(R.id.btn_camera);
             editTextInstruction = itemView.findViewById(R.id.et_instruction);
-        }
-
-        public void bind(Steps instruction) {
-            editTextInstruction.setText(instruction.getStepNumber() + ". " + instruction.getInstruction());
         }
     }
 

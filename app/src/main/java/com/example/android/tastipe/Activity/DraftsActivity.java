@@ -91,7 +91,7 @@ public class DraftsActivity extends AppCompatActivity implements DraftInfoFragme
                 recipeDraft.getTitle() +
                 recipeDraft.getInstructionList().toString() +
                 recipeDraft.getIngredientsList().toString());
-        recipeLab.addFavorite(recipeDraft, DbHelper.TableType.COOKBOOK_TABLE);
+        recipeLab.addCookBook(recipeDraft, DbHelper.TableType.COOKBOOK_TABLE);
     }
 
     private void setupViewPager() {

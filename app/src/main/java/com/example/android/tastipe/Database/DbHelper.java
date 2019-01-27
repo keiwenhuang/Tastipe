@@ -232,6 +232,22 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void createIngredientCookBook(Recipe recipe) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_RECIPE_ID, recipe.getId());
+
+
+        for (Ingredients ingredients : recipe.getIngredientsList()) {
+
+            values.put(KEY_ITEM, ingredients.getItemName());
+            values.put(KEY_QUANTITY, ingredients.getQuantity());
+            db.insert(TABLE_INGREDIENT, null, values);
+
+        }
+    }
+
     /*
      * getting all ingredients
      * */
@@ -303,6 +319,20 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put(KEY_INSTRUCTION, steps.getInstruction());
                 db.insert(TABLE_INSTRUCTION, null, values);
             }
+        }
+    }
+
+    public void createInstructionForCookBook(Recipe recipe) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_RECIPE_ID, recipe.getId());
+
+
+        for (Steps steps : recipe.getInstructionList()) {
+            values.put(KEY_STEP_NUMBER, steps.getStepNumber());
+            values.put(KEY_INSTRUCTION, steps.getInstruction());
+            db.insert(TABLE_INSTRUCTION, null, values);
         }
     }
 

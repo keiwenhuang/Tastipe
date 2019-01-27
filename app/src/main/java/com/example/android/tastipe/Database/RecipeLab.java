@@ -39,6 +39,15 @@ public class RecipeLab {
         dbHelper.createInstruction(recipe);
     }
 
+    public void addCookBook(Recipe recipe, String database) {
+
+        DbHelper dbHelper = new DbHelper(mContext, database);
+
+        dbHelper.createRecipe(recipe);
+        dbHelper.createIngredientCookBook(recipe);
+        dbHelper.createInstructionForCookBook(recipe);
+    }
+
     public void removeFromFavorites(String id, String database) {
 
         DbHelper dbHelper = new DbHelper(mContext, database);
