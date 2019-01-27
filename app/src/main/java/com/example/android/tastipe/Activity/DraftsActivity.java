@@ -9,30 +9,35 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.tastipe.Adapter.PagerAdapter;
+import com.example.android.tastipe.Database.DbHelper;
+import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Fragment.DraftInfoFragment;
 import com.example.android.tastipe.Fragment.DraftIngredientFragment;
 import com.example.android.tastipe.Fragment.DraftInstructionFragment;
+import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
+import com.example.android.tastipe.Model.Steps;
 import com.example.android.tastipe.R;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
  * TODO: Add a class header comment!
  */
-public class DraftsActivity extends AppCompatActivity {
+public class DraftsActivity extends AppCompatActivity implements DraftInfoFragment.RecipeInfoCallback, DraftIngredientFragment.DraftIngredientCallback, DraftInstructionFragment.DraftInstructionCallback {
     private static final String TAG = "DraftsActivity";
     private static final String EXTRA_RECIPE = "EXTRA_RECIPE";
 
-    private Recipe mRecipe;
+    private Recipe mRecipe, recipeDraft;
 
     private ImageView backBtn, saveBtn;
 
@@ -73,14 +78,20 @@ public class DraftsActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DraftsActivity.this, "Draft saved!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DraftsActivity.this, recipeDraft.getTitle() + " saved!", Toast.LENGTH_SHORT).show();
                 saveRecipe();
             }
         });
     }
 
     private void saveRecipe() {
+        RecipeLab recipeLab = new RecipeLab(getApplicationContext());
 
+        Log.d(TAG, "saveRecipe: " +
+                recipeDraft.getTitle() +
+                recipeDraft.getInstructionList().toString() +
+                recipeDraft.getIngredientsList().toString());
+        recipeLab.addFavorite(recipeDraft, DbHelper.TableType.COOKBOOK_TABLE);
     }
 
     private void setupViewPager() {
@@ -99,5 +110,20 @@ public class DraftsActivity extends AppCompatActivity {
         Objects.requireNonNull(tabLayout.getTabAt(0)).setText("1");
         Objects.requireNonNull(tabLayout.getTabAt(1)).setText("2");
         Objects.requireNonNull(tabLayout.getTabAt(2)).setText("3");
+    }
+
+    @Override
+    public void onRecipeInfo(Recipe recipe) {
+        recipeDraft = recipe;
+    }
+
+    @Override
+    public void sendIngredients(List<Ingredients> items) {
+        recipeDraft.setIngredientsList(items);
+    }
+
+    @Override
+    public void sendInstruction(List<Steps> instructions) {
+        recipeDraft.setInstructionList(instructions);
     }
 }

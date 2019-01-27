@@ -5,6 +5,8 @@ package com.example.android.tastipe.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +40,44 @@ public class DraftIngredientItemAdapter extends RecyclerView.Adapter<DraftIngred
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DraftIngredientItemAdapter.ListItemViewHolder holder, int position) {
-        Ingredients ingredients = mIngredientsList.get(position);
-        holder.bind(ingredients);
+    public void onBindViewHolder(@NonNull DraftIngredientItemAdapter.ListItemViewHolder holder, final int position) {
+        final Ingredients ingredient = mIngredientsList.get(position);
+
+        holder.editTextItem.setText(ingredient.getItemName());
+        holder.editTextQuantity.setText(ingredient.getQuantity());
+
+        holder.editTextItem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ingredient.setItemName(s.toString());
+            }
+        });
+        holder.editTextQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ingredient.setQuantity(s.toString());
+            }
+        });
     }
 
     @Override
@@ -52,22 +89,22 @@ public class DraftIngredientItemAdapter extends RecyclerView.Adapter<DraftIngred
 
         public LinearLayout viewForeground;
         public RelativeLayout viewBackground;
-        public EditText itemIngredient, quantity;
+        public EditText editTextItem, editTextQuantity;
 
         public ListItemViewHolder(View itemView) {
             super(itemView);
 
             viewBackground = itemView.findViewById(R.id.view_background);
             viewForeground = itemView.findViewById(R.id.view_foreground);
-            itemIngredient = itemView.findViewById(R.id.edit_text_item);
-            quantity = itemView.findViewById(R.id.edit_text_quantity);
+            editTextItem = itemView.findViewById(R.id.edit_text_item);
+            editTextQuantity = itemView.findViewById(R.id.edit_text_quantity);
         }
 
-        public void bind(Ingredients ingredients) {
-            itemIngredient.setText(ingredients.getItemName());
-
-            // TODO: set quantity
-        }
+//        public void bind(Ingredients ingredients) {
+//            editTextItem.setText(ingredients.getItemName());
+//
+//            // TODO: set quantity
+//        }
     }
 
     public void removeItem(int position) {

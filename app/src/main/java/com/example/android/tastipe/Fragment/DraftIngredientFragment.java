@@ -3,6 +3,7 @@ package com.example.android.tastipe.Fragment;
  * Created by kevin on 11/10/18.
  */
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.android.tastipe.Adapter.DraftIngredientItemAdapter;
+import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
@@ -38,6 +40,8 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
     private DraftIngredientItemAdapter mAdapter;
     private LinearLayout mLinearLayout;
 
+    private DraftIngredientCallback mCallback;
+
     private ImageView btnAddNewItem;
 
     @Override
@@ -48,7 +52,7 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
 
         mRecipeLab = new RecipeLab(getContext());
 
-        mIngredientsList = mRecipeLab.getIngredients(mRecipe.getId());
+        mIngredientsList = mRecipeLab.getIngredients(mRecipe.getId(), DbHelper.TableType.FAVORITE_TABLE);
 
         mLinearLayout = view.findViewById(R.id.container);
 
@@ -69,7 +73,19 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
- }
+
+        mCallback.sendIngredients(mIngredientsList);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mCallback = (DraftIngredientCallback) context;
+
+
+    }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
@@ -93,6 +109,7 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
             snackbar.show();
         }
     }
+
     public void putArguments(Recipe recipe) {
         mRecipe = recipe;
     }
@@ -100,6 +117,10 @@ public class DraftIngredientFragment extends DefaultFragment implements Recycler
     @Override
     protected int layoutRes() {
         return R.layout.fragment_draft_ingredient;
+    }
+
+    public interface DraftIngredientCallback {
+        void sendIngredients(List<Ingredients> items);
     }
 
 

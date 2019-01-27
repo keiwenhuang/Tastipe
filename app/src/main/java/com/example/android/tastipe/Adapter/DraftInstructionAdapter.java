@@ -5,6 +5,8 @@ package com.example.android.tastipe.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +39,30 @@ public class DraftInstructionAdapter extends RecyclerView.Adapter<DraftInstructi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DraftInstructionAdapter.DraftInstructionViewHolder holder, int position) {
-        Steps instructions = mInstructionList.get(position);
-        holder.bind(instructions);
+    public void onBindViewHolder(@NonNull DraftInstructionAdapter.DraftInstructionViewHolder holder, final int position) {
+        final Steps instructions = mInstructionList.get(position);
+//        holder.bind(instructions);
+
+        holder.editTextInstruction.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int stepNumber = position + 1;
+
+                instructions.setStepNumber(String.valueOf(stepNumber));
+                instructions.setInstruction(s.toString());
+            }
+        });
+
     }
 
     @Override
@@ -54,7 +77,7 @@ public class DraftInstructionAdapter extends RecyclerView.Adapter<DraftInstructi
 //        public EditText itemIngredient, quantity;
 
         ImageView ivInstruction, btnCamera;
-        EditText etInstruction;
+        EditText editTextInstruction;
 
         public DraftInstructionViewHolder(View itemView) {
             super(itemView);
@@ -66,11 +89,11 @@ public class DraftInstructionAdapter extends RecyclerView.Adapter<DraftInstructi
 
             ivInstruction = itemView.findViewById(R.id.iv_instruction);
             btnCamera = itemView.findViewById(R.id.btn_camera);
-            etInstruction = itemView.findViewById(R.id.et_instruction);
+            editTextInstruction = itemView.findViewById(R.id.et_instruction);
         }
 
         public void bind(Steps instruction) {
-            etInstruction.setText(instruction.getStepNumber() + ". " + instruction.getInstruction());
+            editTextInstruction.setText(instruction.getStepNumber() + ". " + instruction.getInstruction());
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.android.tastipe.Fragment;
  * Created by kevin on 11/10/18.
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.android.tastipe.Adapter.DraftInstructionAdapter;
+import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.Model.Steps;
@@ -33,6 +35,8 @@ public class DraftInstructionFragment extends DefaultFragment {
     private DraftInstructionAdapter mAdapter;
 //    private LinearLayout mLinearLayout;
 
+    private DraftInstructionCallback mCallback;
+
     private ImageView btnAddNewItem;
 
     @Override
@@ -42,7 +46,7 @@ public class DraftInstructionFragment extends DefaultFragment {
         btnAddNewItem = view.findViewById(R.id.btn_add);
 
         mRecipeLab = new RecipeLab(getContext());
-        mInstructionList = mRecipeLab.getInstructions(mRecipe.getId());
+        mInstructionList = mRecipeLab.getInstructions(mRecipe.getId(), DbHelper.TableType.FAVORITE_TABLE);
 
 //        mLinearLayout = view.findViewById(R.id.container);
 
@@ -61,8 +65,17 @@ public class DraftInstructionFragment extends DefaultFragment {
             }
         });
 
+        mCallback.sendInstruction(mInstructionList);
+
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mCallback = (DraftInstructionCallback) context;
+
+    }
 
     public void putArguments(Recipe recipe) {
         mRecipe = recipe;
@@ -71,5 +84,9 @@ public class DraftInstructionFragment extends DefaultFragment {
     @Override
     protected int layoutRes() {
         return R.layout.fragment_draft_instruction;
+    }
+
+    public interface DraftInstructionCallback {
+        void sendInstruction(List<Steps> instructions);
     }
 }

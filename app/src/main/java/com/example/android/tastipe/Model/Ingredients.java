@@ -57,7 +57,7 @@ public class Ingredients implements Serializable {
 
     @Override
     public String toString() {
-        return itemName;
+        return itemName + " " + quantity;
     }
 
     @Override
