@@ -80,6 +80,7 @@ public class DraftsActivity extends AppCompatActivity implements DraftInfoFragme
             public void onClick(View v) {
                 Toast.makeText(DraftsActivity.this, recipeDraft.getTitle() + " saved!", Toast.LENGTH_SHORT).show();
                 saveRecipe();
+                finish();
             }
         });
     }

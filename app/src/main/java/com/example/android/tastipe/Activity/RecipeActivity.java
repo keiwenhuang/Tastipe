@@ -83,7 +83,12 @@ public class RecipeActivity extends AppCompatActivity {
 
             fetchListFromDatabase(recipeId);
 
-        } else {
+        } else if (getIntent().getExtras().getInt(REQUEST_CODE) == 2) { // intent from CookbookFragment
+
+            fetchListFromCookbook(recipeId);
+
+        }
+        else {
 
             fetchListFromSearch(recipe);
 
@@ -100,6 +105,16 @@ public class RecipeActivity extends AppCompatActivity {
     }
 
     private void fetchListFromSearch(Recipe recipe) {
+    }
+
+
+    private void fetchListFromCookbook(String recipeId) {
+
+        mRecipeLab = new RecipeLab(getApplicationContext());
+
+        mIngredientsList = mRecipeLab.getIngredients(recipeId, DbHelper.TableType.COOKBOOK_TABLE);
+        mStepsList = mRecipeLab.getInstructions(recipeId, DbHelper.TableType.COOKBOOK_TABLE);
+
     }
 
     private void fetchListFromDatabase(String recipeId) {
