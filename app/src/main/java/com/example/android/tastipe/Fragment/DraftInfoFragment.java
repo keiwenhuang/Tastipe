@@ -4,6 +4,7 @@ package com.example.android.tastipe.Fragment;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,11 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.R;
 import com.squareup.picasso.Picasso;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * TODO: Add a class header comment!
@@ -28,7 +30,7 @@ public class DraftInfoFragment extends DefaultFragment {
 
     private Recipe mRecipe = null;
 
-    private ImageView recipeImage;
+    private ImageView recipeImage, cameraBtn;
     private EditText editTextTitle, editTextCookTime, editTextServings;
 
     private RecipeInfoCallback mCallback;
@@ -46,6 +48,7 @@ public class DraftInfoFragment extends DefaultFragment {
         editTextTitle = view.findViewById(R.id.et_title);
         editTextCookTime = view.findViewById(R.id.et_cooking_time);
         editTextServings = view.findViewById(R.id.et_servings);
+        cameraBtn = view.findViewById(R.id.btn_camera);
 
         bindData();
 
@@ -100,8 +103,37 @@ public class DraftInfoFragment extends DefaultFragment {
             }
         });
 
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                PhotoPickerDialogFragment dialog = new PhotoPickerDialogFragment();
+                dialog.setTargetFragment(DraftInfoFragment.this, 1);
+                dialog.show(getFragmentManager(), "PhotoPickerDialogFragment");
+            }
+        });
+
         mCallback.onRecipeInfo(mRecipe);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    mRecipe.setImage(String.valueOf(selectedImage));
+                }
+                break;
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    Uri selectedImage = data.getData();
+                    mRecipe.setImage(String.valueOf(selectedImage));
+                }
+                break;
+        }
     }
 
     @Override
