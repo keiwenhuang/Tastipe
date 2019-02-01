@@ -21,6 +21,7 @@ import com.example.android.tastipe.Network.RecipeApi;
 import com.example.android.tastipe.Network.RecipeList;
 import com.example.android.tastipe.Network.RetrofitInstance;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
@@ -36,7 +37,6 @@ import retrofit2.Response;
 public class RecipeListFragment extends DefaultFragment {
     private static final String TAG = "RecipeListFragment";
 
-    private static final int ACTIVITY_NUM = 1;
     private static final int RECIPE_GENERATED = 10;
     private static final int REQUEST_CODE = 0;
 
@@ -68,8 +68,10 @@ public class RecipeListFragment extends DefaultFragment {
     }
 
     private void randomRecipe() {
-        Log.d(TAG, "randomRecipe: ");
+        Log.d(TAG, "randomRecipe: generating random recipes");
+
         mProgressBar.setVisibility(View.VISIBLE);
+        Log.d(TAG, "randomRecipe: show progressBar");
 
         RecipeApi service = RetrofitInstance.getRetrofitInstance().create(RecipeApi.class);
         Log.d(TAG, "randomRecipe: service created");
@@ -101,7 +103,7 @@ public class RecipeListFragment extends DefaultFragment {
         Log.d(TAG, "generateRecipeList: ");
         mRecyclerView = getView().findViewById(R.id.recyclerView);
 
-        adapter = new ListAdapter(recipeArrayList, ACTIVITY_NUM);
+        adapter = new ListAdapter(recipeArrayList, AppConfig.ListType.RECIPE_LIST);
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {

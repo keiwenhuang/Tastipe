@@ -18,6 +18,7 @@ import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -29,19 +30,17 @@ import java.util.List;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
     private static final String TAG = "ListAdapter";
 
-    private final int RECIPE = 1, FAVORITE = 2;
-
     private List<Recipe> mRecipeList;
-    private int mActivity;
+    private int fragment;
     private Callback callback;
 
     public ListAdapter() {
         mRecipeList = Collections.emptyList();
     }
 
-    public ListAdapter(List<Recipe> recipeList, int activity) {
+    public ListAdapter(List<Recipe> recipeList, int fragment) {
         mRecipeList = recipeList;
-        mActivity = activity;
+        this.fragment = fragment;
     }
 
     public void setRecipeList(List<Recipe> recipeList) {
@@ -58,9 +57,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         View view = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        if (mActivity == RECIPE) {
+        if (fragment == AppConfig.ListType.RECIPE_LIST) {
             view = inflater.inflate(R.layout.card_recipe, parent, false);
-        } else if (mActivity == FAVORITE) {
+        } else if (fragment == AppConfig.ListType.FAVORITE_LIST) {
             view = inflater.inflate(R.layout.card_favorite, parent, false);
         }
 

@@ -4,11 +4,10 @@ import android.support.v4.app.Fragment;
 
 import com.example.android.tastipe.Fragment.CookbookFragment;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 
 public class CookbookListActivity extends DefaultActivity {
     private static final String TAG = "CookbookListActivity";
-
-    private final int ACTIVITY_NUM = 2;
 
     @Override
     protected Fragment createInitialFragment() {
@@ -22,7 +21,7 @@ public class CookbookListActivity extends DefaultActivity {
 
     @Override
     protected int getActivityNum() {
-        return ACTIVITY_NUM;
+        return AppConfig.ActivityType.COOKBOOKLIST;
     }
 
     @Override

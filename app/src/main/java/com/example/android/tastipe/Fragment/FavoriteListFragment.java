@@ -16,6 +16,7 @@ import com.example.android.tastipe.Adapter.ListAdapter;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,6 @@ import java.util.List;
 public class FavoriteListFragment extends DefaultFragment {
     private static final String TAG = "FavoriteListFragment";
 
-    // Database Name
-    private static final String DATABASE_FAVORITE = "FAVORITE";
-    private static final String DATABASE_COOKBOOK = "COOKBOOK";
-
-    private static final int ACTIVITY_NUM = 2;
     private static final int REQUEST_CODE = 1;
 
     private RecyclerView mRecyclerView;
@@ -52,11 +48,11 @@ public class FavoriteListFragment extends DefaultFragment {
     private void generateRecipeList() {
         RecipeLab recipeLab = RecipeLab.get(getActivity());
 
-        recipeList = recipeLab.getRecipes(DATABASE_FAVORITE);
+        recipeList = recipeLab.getRecipes(AppConfig.Database.FAVORITE);
 
         mRecyclerView = getView().findViewById(R.id.recyclerView);
 
-        adapter = new ListAdapter(recipeList, ACTIVITY_NUM);
+        adapter = new ListAdapter(recipeList, AppConfig.ListType.FAVORITE_LIST);
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {

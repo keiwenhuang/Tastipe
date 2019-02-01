@@ -25,6 +25,7 @@ import com.example.android.tastipe.Fragment.RecipeListFragment;
 import com.example.android.tastipe.Fragment.TipListFragment;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 import com.example.android.tastipe.Utils.NavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -32,7 +33,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
     private Context mContext = HomeActivity.this;
-    private final int ACTIVITY_NUM = 0;
 
     private DrawerLayout mDrawerLayout;
 
@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationViewEx navigationViewEx = (BottomNavigationViewEx) findViewById(R.id.navigation_view_bar);
         NavigationViewHelper.enableNavigation(mContext, navigationViewEx);
         Menu menu = navigationViewEx.getMenu();
-        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        MenuItem menuItem = menu.getItem(AppConfig.ActivityType.HOME);
         menuItem.setChecked(true);
     }
 

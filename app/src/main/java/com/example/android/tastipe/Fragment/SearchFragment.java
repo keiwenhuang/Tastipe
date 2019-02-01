@@ -29,6 +29,7 @@ import com.example.android.tastipe.Network.RecipeApi;
 import com.example.android.tastipe.Network.ResultList;
 import com.example.android.tastipe.Network.RetrofitInstance;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class SearchFragment extends DefaultFragment {
     private static final String TAG = "SearchFragment";
     public static final int RECIPE_GENERATED = 10;
     private static final int REQUEST_CODE = 2;
-    private static final int ACTIVITY_NUM = 2;
 
 //    private RecyclerView mCuisineRecyclerView, mDietRecyclerView, mAllergyRecyclerView;
 //    private RecyclerView.Adapter mCuisineAdapter, mDietAdapter, mAllergyAdapter;
@@ -155,7 +155,7 @@ public class SearchFragment extends DefaultFragment {
 
     private void generateRecipeList(List<Recipe> recipeArrayList) {
 
-        adapter = new ListAdapter(recipeArrayList, ACTIVITY_NUM);
+        adapter = new ListAdapter(recipeArrayList, AppConfig.ListType.FAVORITE_LIST);
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {
