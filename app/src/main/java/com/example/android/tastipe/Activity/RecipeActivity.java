@@ -24,6 +24,7 @@ import com.example.android.tastipe.Model.Ingredients;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.Model.Steps;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 import com.example.android.tastipe.Utils.ListUtils;
 import com.squareup.picasso.Picasso;
 
@@ -75,15 +76,15 @@ public class RecipeActivity extends AppCompatActivity {
         recipe = (Recipe) getIntent().getSerializableExtra(EXTRA_RECIPE);
         String recipeId = recipe.getId();
 
-        if (getIntent().getExtras().getInt(REQUEST_CODE) == 0) { // intent from RecipeListFragment
+        if (getIntent().getExtras().getInt(REQUEST_CODE) == AppConfig.ListType.RECIPE_LIST) { // intent from RecipeListFragment
 
             fetchListFromApi(recipe);
 
-        } else if (getIntent().getExtras().getInt(REQUEST_CODE) == 1) { // intent from FavoriteListFragment
+        } else if (getIntent().getExtras().getInt(REQUEST_CODE) == AppConfig.ListType.FAVORITE_LIST) { // intent from FavoriteListFragment
 
             fetchListFromDatabase(recipeId);
 
-        } else if (getIntent().getExtras().getInt(REQUEST_CODE) == 2) { // intent from CookbookFragment
+        } else if (getIntent().getExtras().getInt(REQUEST_CODE) == AppConfig.ListType.COOKBOOK_LIST) { // intent from CookbookFragment
 
             fetchListFromCookbook(recipeId);
 

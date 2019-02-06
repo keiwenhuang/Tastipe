@@ -61,8 +61,8 @@ public class HomeActivity extends AppCompatActivity {
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new RecipeListFragment()); //index 0
-        adapter.addFragment(new ArticleListFragment()); //index 1
-        adapter.addFragment(new TipListFragment()); //index 2
+//        adapter.addFragment(new ArticleListFragment()); //index 1
+//        adapter.addFragment(new TipListFragment()); //index 2
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.container);
         viewPager.setAdapter(adapter);
@@ -71,8 +71,8 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.getTabAt(0).setText(R.string.recipes);
-        tabLayout.getTabAt(1).setText(R.string.articles);
-        tabLayout.getTabAt(2).setText(R.string.cooking_tips);
+//        tabLayout.getTabAt(1).setText(R.string.articles);
+//        tabLayout.getTabAt(2).setText(R.string.cooking_tips);
     }
 
     private void setupToolbar() {

@@ -18,6 +18,7 @@ import com.example.android.tastipe.Database.DbHelper;
 import com.example.android.tastipe.Database.RecipeLab;
 import com.example.android.tastipe.Model.Recipe;
 import com.example.android.tastipe.R;
+import com.example.android.tastipe.Utils.AppConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,6 @@ import java.util.List;
  */
 public class CookbookFragment extends DefaultFragment {
     private static final String TAG = "CookbookFragment";
-
-    private static final int REQUEST_CODE = 2;
 
     private RecyclerView mRecyclerView;
     private List<Recipe> mRecipeList = new ArrayList<>();
@@ -53,7 +52,7 @@ public class CookbookFragment extends DefaultFragment {
         mAdapter.setCallback(new CookbookListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {
-                startActivity(RecipeActivity.newIntent(getActivity(), recipe, REQUEST_CODE));
+                startActivity(RecipeActivity.newIntent(getActivity(), recipe, AppConfig.ListType.COOKBOOK_LIST));
             }
         });
 

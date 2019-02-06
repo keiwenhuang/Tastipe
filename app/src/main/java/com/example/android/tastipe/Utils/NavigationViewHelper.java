@@ -31,14 +31,17 @@ public class NavigationViewHelper {
 
                     case R.id.ic_home:
                         Intent intent1 = new Intent(context, HomeActivity.class);
+                        intent1.setFlags(intent1.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent1);
                         break;
                     case R.id.ic_search:
                         Intent intent2 = new Intent(context, SearchActivity.class);
+                        intent2.setFlags(intent2.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent2);
                         break;
                     case R.id.ic_cookbook:
                         Intent intent3 = new Intent(context, CookbookListActivity.class);
+                        intent3.setFlags(intent3.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent3);
                         break;
                 }

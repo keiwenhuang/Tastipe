@@ -44,7 +44,7 @@ public class RecipeListFragment extends DefaultFragment {
     private ListAdapter adapter;
     private ProgressBar mProgressBar;
 
-    private List<Recipe> recipeLists = new ArrayList<>();
+    private List<Recipe> recipeList = new ArrayList<>();
 
     @Override
     protected int layoutRes() {
@@ -64,10 +64,10 @@ public class RecipeListFragment extends DefaultFragment {
         Log.d(TAG, "onViewCreated: ");
 
         mProgressBar = view.findViewById(R.id.progressBar);
-        randomRecipe();
+        getRandomRecipes();
     }
 
-    private void randomRecipe() {
+    private void getRandomRecipes() {
         Log.d(TAG, "randomRecipe: generating random recipes");
 
         mProgressBar.setVisibility(View.VISIBLE);
@@ -83,11 +83,11 @@ public class RecipeListFragment extends DefaultFragment {
             @Override
             public void onResponse(Call<RecipeList> call, Response<RecipeList> response) {
                 Log.d(TAG, "onResponse: " + response.body().getRecipeArrayList());
-                Log.d("2.0 getFeed > ", new GsonBuilder().setPrettyPrinting().create().toJson(response));
+                Log.d("getFeed: ", new GsonBuilder().setPrettyPrinting().create().toJson(response));
                 mProgressBar.setVisibility(View.GONE);
 
-                recipeLists = response.body().getRecipeArrayList();
-                generateRecipeList(recipeLists);
+                recipeList = response.body().getRecipeArrayList();
+                generateRecipeList(recipeList);
             }
 
             @Override
@@ -107,7 +107,7 @@ public class RecipeListFragment extends DefaultFragment {
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {
-                startActivity(RecipeActivity.newIntent(getActivity(), recipe, REQUEST_CODE));
+                startActivity(RecipeActivity.newIntent(getActivity(), recipe, AppConfig.ListType.RECIPE_LIST));
             }
         });
 

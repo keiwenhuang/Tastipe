@@ -19,6 +19,7 @@ public class AppConfig {
     public static class ListType {
         public static final int RECIPE_LIST = 0;
         public static final int FAVORITE_LIST = 1;
+        public static final int COOKBOOK_LIST = 2;
     }
 
     public class Database {

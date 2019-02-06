@@ -27,8 +27,6 @@ import java.util.List;
 public class FavoriteListFragment extends DefaultFragment {
     private static final String TAG = "FavoriteListFragment";
 
-    private static final int REQUEST_CODE = 1;
-
     private RecyclerView mRecyclerView;
     private List<Recipe> recipeList = new ArrayList<>();
     private ListAdapter adapter;
@@ -56,7 +54,7 @@ public class FavoriteListFragment extends DefaultFragment {
         adapter.setCallback(new ListAdapter.Callback() {
             @Override
             public void onItemClick(Recipe recipe) {
-                startActivity(RecipeActivity.newIntent(getActivity(), recipe, REQUEST_CODE));
+                startActivity(RecipeActivity.newIntent(getActivity(), recipe, AppConfig.ListType.FAVORITE_LIST));
             }
         });
 
